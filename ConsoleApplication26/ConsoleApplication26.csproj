@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bill.cs" />
+    <Compile Include="BillGenerator.cs" />
     <Compile Include="HTMLPresenter.cs" />
     <Compile Include="IPresenter.cs" />
     <Compile Include="Regular.cs" />

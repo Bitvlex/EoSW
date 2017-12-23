@@ -21,10 +21,11 @@ namespace TestLibrary
             Item i1 = new Item(fanta, 2, price_for_fanta);
             Item i2 = new Item(snikers, 3, price_for_snikers);
             Customer Denis = new Customer("Denis", 10);
-            Bill b1 = new Bill(Denis);
+            IPresenter p = new TXTPresenter();
+            BillGenerator b1 = new BillGenerator(Denis, p);
             b1.addGoods(i1);
             b1.addGoods(i2);
-            string bill = b1.statement();
+            string bill = b1.GenerateBill();
             double actual = b1.f;
             double exepted = 186.03;
             Assert.AreEqual(exepted, actual);
@@ -36,11 +37,12 @@ namespace TestLibrary
             Goods pepsi = new Sale("Pepsi");
             Item i1 = new Item(cola, 6, 65);
             Item i2 = new Item(pepsi, 3, 50);
+            IPresenter p = new TXTPresenter();
             Customer x = new Customer("test", 10);
-            Bill b1 = new Bill(x);
+            BillGenerator b1 = new BillGenerator(x, p);
             b1.addGoods(i1);
             b1.addGoods(i2);
-            string bill = b1.statement();
+            string bill = b1.GenerateBill();
             double actual = b1.f;
             double exepted = 521.60000000000002;
             Assert.AreEqual(exepted, actual);
@@ -54,12 +56,13 @@ namespace TestLibrary
             Item i1 = new Item(pivo, 2, 67);
             Item i2 = new Item(chipsi, 4, 45);
             Item i3 = new Item(nuts, 2, 27);
+            IPresenter p = new TXTPresenter();
             Customer x = new Customer("Denis", 15);
-            Bill b1 = new Bill(x);
+            BillGenerator b1 = new BillGenerator(x, p);
             b1.addGoods(i1);
             b1.addGoods(i2);
             b1.addGoods(i3);
-            string bill = b1.statement();
+            string bill = b1.GenerateBill();
             double actual = b1.f;
             double exepted = 351.19999999999999;
             Assert.AreEqual(exepted, actual);
@@ -72,30 +75,32 @@ namespace TestLibrary
             Item i1 = new Item(cola, 6, 65);
             Item i2 = new Item(pepsi, 3, 50);
             Customer x = new Customer("test", 10);
-            Bill b1 = new Bill(x);
+            IPresenter p = new TXTPresenter();
+            BillGenerator b1 = new BillGenerator(x, p);
             b1.addGoods(i1);
             b1.addGoods(i2);
-            string bill = b1.statement();
+            string bill = b1.GenerateBill();
             double actual = b1.bonus;
             double exepted = 10;
             Assert.AreEqual(exepted, actual);
         }
         [Test]
-        public void BonusBallTest2_Base()
+        public void HTML_Presenter_test()
         {
-            Goods fanta = new Goods("Fanta");
-            Goods snikers = new Goods("Snikers");
+            Goods fanta = new Regular("Fanta");
+            Goods snikers = new Sale("Snikers");
             int price_for_fanta = 45;
             int price_for_snikers = 33;
             Item i1 = new Item(fanta, 2, price_for_fanta);
             Item i2 = new Item(snikers, 3, price_for_snikers);
             Customer Denis = new Customer("Denis", 10);
-            Bill b1 = new Bill(Denis);
+            IPresenter p = new HTMLPresenter();
+            BillGenerator b1 = new BillGenerator(Denis, p);
             b1.addGoods(i1);
             b1.addGoods(i2);
-            string bill = b1.statement();
+            string bill = b1.GenerateBill();
             double actual = b1.bonus;
-            double exepted = 0;
+            double exepted = 4;
             Assert.AreEqual(exepted, actual);
         }
     }
