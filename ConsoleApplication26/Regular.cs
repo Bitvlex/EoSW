@@ -8,46 +8,59 @@ namespace ConsoleApplication27
 {
     public class Regular : Goods
     {
-        public Regular(string id, string name) : base(name)
+        IStrategy _strategy;
+        public Regular(string id, string name, IStrategy strategy) : base(name, strategy)
         {
-
+            this._strategy = strategy;
         }
         public override double GetSum(Item each)
         {
             double sum = each.getQuantity() * each.getPrice();
             return sum;
         }
-        public override int Get_Bonuses(Item each)
+        public override double Get_Bonuses(Item each)
         {
-            int bonuses = 0;
-            if (each.getQuantity() > 2)
+            if (_strategy is bonusStrategy)
             {
-                bonuses = (int)(GetSum(each) * 0.05);
+                return _strategy.Algorithm(each);
             }
-            if (each.getQuantity() > 3)
+            else
             {
-                bonuses = (int)(GetSum(each) * 0.01);
+                double bonuses = 0;
+                if (each.getQuantity() > 2)
+                {
+                    bonuses = (int)(GetSum(each) * 0.05);
+                }
+                if (each.getQuantity() > 3)
+                {
+                    bonuses = (int)(GetSum(each) * 0.01);
+                }
+                return bonuses;
             }
-            return bonuses;
         }
         public override double Get_Discount(Item each)
         {
-            double discount = 0;
-            if (each.getQuantity() > 2)
+            if (_strategy is discountStrategy)
             {
-                discount = GetSum(each) * 0.03;
+                return _strategy.Algorithm(each);
             }
-
-            if (each.getQuantity() > 10)
+            else
             {
-                discount = GetSum(each) * 0.005;
+                double discount = 0;
+                if (each.getQuantity() > 2)
+                {
+                    discount = GetSum(each) * 0.03;
+                }
+                if (each.getQuantity() > 10)
+                {
+                    discount = GetSum(each) * 0.005;
+                }
+                if (each.getQuantity() > 3)
+                {
+                    discount = GetSum(each) * 0.01;
+                }
+                return discount;
             }
-
-            if (each.getQuantity() > 3)
-            {
-                discount = GetSum(each) * 0.01;
-            }
-            return discount;
         }
     }
 }

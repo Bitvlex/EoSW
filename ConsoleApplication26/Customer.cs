@@ -8,9 +8,9 @@ namespace ConsoleApplication27
 {
     public class Customer
     {
-        private int bonus;
+        private double bonus;
         private String name;
-        public Customer(String name, int bonus)
+        public Customer(String name, double bonus)
         {
             this.name = name;
             this.bonus = bonus;
@@ -19,17 +19,17 @@ namespace ConsoleApplication27
         {
             return name;
         }
-        public int getBonus()
+        public double getBonus()
         {
             return bonus;
         }
-        public void receiveBonus(int bonus)
+        public void receiveBonus(double bonus)
         {
             this.bonus = bonus;
         }
-        public int useBonus(int needBonus)
+        public double useBonus(double needBonus)
         {
-            int bonusTaken;
+            double bonusTaken;
             if (needBonus > bonus)
             {
                 bonusTaken = bonus;

@@ -11,6 +11,7 @@ namespace ConsoleApplication27
         private List<Item> _items;
         private Customer _customer;
         public string result;
+
         IPresenter p;
         protected override int GetItemsCount(List<Item> _items)
         {
@@ -71,13 +72,13 @@ namespace ConsoleApplication27
         public String GenerateBill()
         {
             double totalAmount = 0;
-            int totalBonus = 0;
+            double totalBonus = 0;
             List<Item>.Enumerator items = _items.GetEnumerator();
             result = p.GetHeader(_customer);
             while (items.MoveNext())
             {
                 double discount = 0;
-                int bonus = 0;
+                double bonus = 0;
                 Item each = (Item)items.Current;
 
                 discount = each.GetDiscount();

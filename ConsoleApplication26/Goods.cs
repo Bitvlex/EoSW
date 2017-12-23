@@ -14,7 +14,7 @@ namespace ConsoleApplication27
         {
             return 0;
         }
-        public virtual int Get_Bonuses(Item each)
+        public virtual double Get_Bonuses(Item each)
         {
             return 0;
         }
@@ -22,7 +22,7 @@ namespace ConsoleApplication27
         {
             return 0;
         }
-        public Goods(String title)
+        public Goods(String title, IStrategy strategy)
         {
             _title = title;
         }

@@ -17,7 +17,7 @@ namespace ConsoleApplication27
             _quantity = quantity;
             _price = price;
         }
-        public int GetBonus()
+        public double GetBonus()
         {
             return _Goods.Get_Bonuses(this);
         }
