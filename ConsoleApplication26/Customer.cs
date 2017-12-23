@@ -43,3 +43,4 @@ namespace ConsoleApplication27
             return bonusTaken;
         }
     }
+}

@@ -8,7 +8,7 @@ namespace ConsoleApplication27
 {
     public class Sale : Goods
     {
-        public Sale(string name) : base(name)
+        public Sale(string id, string name) : base(name)
         {
 
         }

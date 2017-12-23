@@ -6,14 +6,36 @@ using System.Threading.Tasks;
 
 namespace ConsoleApplication27
 {
-    public class BillGenerator
+    public class BillGenerator : AbstractContentFile
     {
         private List<Item> _items;
         private Customer _customer;
-        public double f;
-        public double bonus;
         public string result;
         IPresenter p;
+        protected override int GetItemsCount(List<Item> _items)
+        {
+            int count = 0;
+            for (int i = 0; i < _items.Count; i++)
+            {
+                count++;
+            }
+            return count++;
+        }
+        protected override string GetCustomer()
+        {
+            string customer = _customer.getName();
+            return customer;
+        }
+        protected override int GetGoodsCount(Item each)
+        {
+            int count = 0;
+            int Goods = each.getQuantity();
+            if (Goods > 0)
+            {
+                count++;
+            }
+            return count;
+        }
         public double GetSum(Item each)
         {
             double sum = each.getQuantity() * each.getPrice();
@@ -25,6 +47,7 @@ namespace ConsoleApplication27
             this._items = new List<Item>();
             this.p = p;
         }
+
         public void addGoods(Item arg)
         {
             _items.Add(arg);
@@ -42,6 +65,9 @@ namespace ConsoleApplication27
             }
             return discount;
         }
+        public double f;
+        public double bonus;
+        public double discount_1;
         public String GenerateBill()
         {
             double totalAmount = 0;
@@ -60,7 +86,7 @@ namespace ConsoleApplication27
                 double thisAmount = each.getQuantity() * each.getPrice();
 
                 discount += UsingBonuses(each);
-
+                discount_1 = discount;
                 thisAmount = each.getQuantity() * each.getPrice() - discount;
 
                 result += p.Showing_result(thisAmount, discount, bonus, each);

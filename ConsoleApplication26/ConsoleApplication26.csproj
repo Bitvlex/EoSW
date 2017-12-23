@@ -43,7 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Bill.cs" />
+    <Compile Include="AbstractContentFile.cs" />
+    <Compile Include="BillFactory.cs" />
     <Compile Include="BillGenerator.cs" />
     <Compile Include="HTMLPresenter.cs" />
     <Compile Include="IPresenter.cs" />

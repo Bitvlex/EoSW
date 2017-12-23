@@ -8,7 +8,7 @@ namespace ConsoleApplication27
 {
     public class Regular : Goods
     {
-        public Regular(string name) : base(name)
+        public Regular(string id, string name) : base(name)
         {
 
         }
