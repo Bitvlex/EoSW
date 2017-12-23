@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication26
+namespace ConsoleApplication27
 {
     public class Bill
     {
@@ -13,6 +13,11 @@ namespace ConsoleApplication26
         public double f;
         public double bonus;
         public string result;
+        public double GetSum(Item each)
+        {
+            double sum = each.getQuantity() * each.getPrice();
+            return sum;
+        }
         public Bill(Customer customer)
         {
             this._customer = customer;
@@ -27,11 +32,6 @@ namespace ConsoleApplication26
             string result = "Счет для " + _customer.getName() + "\n" + "\t" + "Название" + "\t" + "Цена" + "\t" + "Кол-во" + "Стоимость" + "\t" + "Скидка" + "\t" + "Сумма" + "\t" + "Бонус" + "\n";
             return result;
         }
-        public double GetSum(Item each)
-        {
-            double sum = each.getQuantity() * each.getPrice();
-            return sum;
-        }
         public string ReturnInfo(double amount, double bonuses)
         {
             string info = "Сумма счета составляет " + amount.ToString() + "\n" + "Вы заработали " + bonuses.ToString() + " бонусных балов";
@@ -40,11 +40,11 @@ namespace ConsoleApplication26
         public double UsingBonuses(Item each)
         {
             double discount = 0;
-            if ((each.getGoods().getPriceCode() == Goods.REGULAR) && each.getQuantity() > 5)
+            if (each.getGoods().GetType() == typeof(Regular) && each.getQuantity() > 5)
             {
                 discount += _customer.useBonus((int)(GetSum(each)));
             }
-            if ((each.getGoods().getPriceCode() == Goods.SPECIAL_OFFER) && each.getQuantity() > 1)
+            if (each.getGoods().GetType() == typeof(Special) && each.getQuantity() > 1)
             {
                 discount = _customer.useBonus((int)(GetSum(each)));
             }
@@ -56,53 +56,7 @@ namespace ConsoleApplication26
             result = "\t" + each.getGoods().getTitle() + "\t" + "\t" + each.getPrice() + "\t" + each.getQuantity() + "\t" + (each.getQuantity() * each.getPrice()).ToString() + "\t" + discount.ToString() + "\t" + thisAmount.ToString() + "\t" + bonus.ToString() + "\n";
             return result;
         }
-        public int Get_Bonuses(Item each)
-        {
-            int bonuses = 0;
 
-            switch (each.getGoods().getPriceCode())
-            {
-                case Goods.REGULAR:
-                    if (each.getQuantity() > 2)
-                    {
-                        bonuses = (int)(GetSum(each) * 0.05);
-                    }
-                    break;
-                case Goods.SALE:
-                    if (each.getQuantity() > 3)
-                    {
-                        bonuses = (int)(GetSum(each) * 0.01);
-                    }
-                    break;
-            }
-            return bonuses;
-        }
-        public double Get_Discount(Item each)
-        {
-            double discount = 0;
-            switch (each.getGoods().getPriceCode())
-            {
-                case Goods.REGULAR:
-                    if (each.getQuantity() > 2)
-                    {
-                        discount = (GetSum(each)) * 0.03;
-                    }
-                break;
-                case Goods.SPECIAL_OFFER:
-                    if (each.getQuantity() > 10)
-                    {
-                        discount = (GetSum(each)) * 0.005;
-                    }
-                break;
-                case Goods.SALE:
-                    if (each.getQuantity() > 3)
-                    {
-                        discount = (GetSum(each)) * 0.01;
-                    }
-                break;
-            }
-            return discount;
-        }
         public String statement()
         {
             double totalAmount = 0;
@@ -113,9 +67,11 @@ namespace ConsoleApplication26
             {
                 double discount = 0;
                 int bonus = 0;
-                Item each = (Item)items.Current;        
-                discount = Get_Discount(each);
-                bonus = Get_Bonuses(each);                
+                Item each = (Item)items.Current;
+
+                discount = each.GetDiscount();
+                bonus = each.GetBonus();
+
                 double thisAmount = each.getQuantity() * each.getPrice();
 
                 discount += UsingBonuses(each);
@@ -136,3 +92,4 @@ namespace ConsoleApplication26
         }
     }
 }
+

@@ -4,19 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApplication26
+namespace ConsoleApplication27
 {
     public class Goods
     {
-        public const int REGULAR = 0;
-        public const int SALE = 1;
-        public const int SPECIAL_OFFER = 2;
-        private String _title;
-        private int _priceCode;
-        public Goods(String title, int priceCode)
+        protected String _title;
+        protected int _priceCode;
+        public virtual double GetSum(Item each)
+        {
+            return 0;
+        }
+        public virtual int Get_Bonuses(Item each)
+        {
+            return 0;
+        }
+        public virtual double Get_Discount(Item each)
+        {
+            return 0;
+        }
+        public Goods(String title)
         {
             _title = title;
-            _priceCode = priceCode;
         }
         public int getPriceCode()
         {

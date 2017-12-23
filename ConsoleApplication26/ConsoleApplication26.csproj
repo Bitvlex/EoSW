@@ -44,11 +44,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bill.cs" />
+    <Compile Include="Regular.cs" />
+    <Compile Include="Sale.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="Goods.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Special.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
