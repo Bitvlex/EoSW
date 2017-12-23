@@ -14,10 +14,11 @@ namespace ConsoleApplication27
             Item i1 = new Item(cola, 6, 65);
             Item i2 = new Item(pepsi, 3, 50);
             Customer x = new Customer("Denis", 10);
-            Bill b1 = new Bill(x);
+            IPresenter p = new TXTPresenter();
+            BillGenerator b1 = new BillGenerator(x, p);
             b1.addGoods(i1);
             b1.addGoods(i2);
-            string bill = b1.statement();
+            string bill = b1.GenerateBill();
             Console.WriteLine(bill);
             Console.ReadLine();
         }
